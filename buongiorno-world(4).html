@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buongiorno, World — not everyone gets a good morning. You will.</title>
+<meta name="description" content="Every day, a real person somewhere on Earth says good morning to you — in their own voice, their own language, with a piece of their story. Send one, receive five days of mornings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:ital,wght@0,400..600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#231C45;--deep:#1A1438;--dusk:#5A3D6E;--rose:#E96D5E;--apricot:#F6A85C;
+    --gold:#FFD27A;--sky:#FFF3E2;--paper:#FFFBF4;--ink:#33291F;--ink-soft:#6E6052;--line:#EADDC8;
+    --display:'Bricolage Grotesque',sans-serif;--body:'Instrument Sans',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.65;font-size:17px}
+  h1,h2,h3{font-family:var(--display);line-height:1.08;font-weight:650;letter-spacing:-0.012em}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--rose);border-radius:2px}
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* ================= HERO ================= */
+  .hero{position:relative;background:linear-gradient(180deg,var(--deep) 0%,var(--night) 26%,var(--dusk) 50%,var(--rose) 74%,var(--apricot) 90%,var(--sky) 100%);color:var(--sky);overflow:hidden}
+  .stars{position:absolute;inset:0 0 45% 0;pointer-events:none;
+    background-image:radial-gradient(1.6px 1.6px at 12% 22%,rgba(255,255,255,.9),transparent 60%),
+      radial-gradient(1.2px 1.2px at 28% 9%,rgba(255,255,255,.7),transparent 60%),
+      radial-gradient(1.8px 1.8px at 44% 30%,rgba(255,235,200,.85),transparent 60%),
+      radial-gradient(1.2px 1.2px at 61% 12%,rgba(255,255,255,.75),transparent 60%),
+      radial-gradient(1.5px 1.5px at 73% 25%,rgba(255,255,255,.8),transparent 60%),
+      radial-gradient(1.2px 1.2px at 86% 8%,rgba(255,235,200,.7),transparent 60%),
+      radial-gradient(1.8px 1.8px at 93% 32%,rgba(255,255,255,.65),transparent 60%),
+      radial-gradient(1.2px 1.2px at 7% 42%,rgba(255,255,255,.5),transparent 60%),
+      radial-gradient(1.4px 1.4px at 52% 44%,rgba(255,255,255,.45),transparent 60%);
+    animation:twinkle 5s ease-in-out infinite alternate}
+  @keyframes twinkle{from{opacity:.55}to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.stars{animation:none}}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0;position:relative;z-index:2}
+  .logo{font-family:var(--display);font-weight:700;font-size:20px;color:#fff;text-decoration:none}
+  .logo span{color:var(--gold)}
+  nav .links{display:flex;gap:28px;align-items:center}
+  nav .links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:15px}
+  nav .links a:hover,nav .links a:focus-visible{color:var(--gold)}
+  nav .links .navcta{background:rgba(255,210,122,.14);border:1px solid rgba(255,210,122,.55);color:var(--gold);padding:9px 18px;border-radius:999px;font-weight:600}
+
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center;padding:60px 0 110px;position:relative;z-index:2}
+  .kicker{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
+    padding:8px 18px;border-radius:999px;font-size:13.5px;color:#FFE9C8;letter-spacing:.04em;margin-bottom:26px;backdrop-filter:blur(4px)}
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 2px rgba(255,210,122,.8)}
+  .hero h1{font-size:clamp(40px,5.6vw,66px);color:#fff;margin-bottom:24px}
+  .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--gold),#FFB877);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{font-size:19.5px;color:rgba(255,248,238,.94);max-width:29em;margin-bottom:38px}
+  .hero p.lead b{color:var(--gold);font-weight:600}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--display);font-weight:600;font-size:17px;padding:16px 32px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover,.btn:focus-visible{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--gold),var(--apricot));color:var(--deep);box-shadow:0 10px 30px rgba(246,168,92,.4)}
+  .btn-primary:hover{box-shadow:0 14px 36px rgba(246,168,92,.55)}
+  .btn-ghost{border:1.5px solid rgba(255,255,255,.5);color:#fff;margin-left:14px;background:rgba(255,255,255,.05)}
+  .hero-proof{margin-top:34px;font-size:14px;color:rgba(255,243,226,.75);display:flex;align-items:center;gap:10px}
+  .hero-proof .suns{letter-spacing:2px}
+
+  /* The hero window */
+  .window{position:relative;width:min(350px,80vw);aspect-ratio:3/4.1;margin:0 auto;border-radius:175px 175px 20px 20px;
+    background:linear-gradient(180deg,#FFE9C8 0%,var(--apricot) 45%,var(--rose) 100%);border:11px solid #14102E;
+    box-shadow:0 14px 0 -6px #2E2558,0 44px 80px rgba(12,8,38,.6),inset 0 0 0 7px rgba(255,255,255,.28);overflow:hidden;cursor:pointer;
+    transition:transform .25s ease}
+  .window:hover,.window:focus-visible{transform:translateY(-6px) rotate(-.5deg)}
+  .window .sun{position:absolute;left:50%;bottom:26%;width:124px;height:124px;margin-left:-62px;border-radius:50%;
+    background:radial-gradient(circle at 50% 38%,#FFF6D8,var(--gold) 60%,var(--apricot));box-shadow:0 0 80px 32px rgba(255,210,122,.7);
+    animation:rise 9s ease-in-out infinite alternate}
+  .window .sea{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,#C9485B,#7A2E55)}
+  .window .glints{position:absolute;left:0;right:0;bottom:8%;height:14%;
+    background-image:radial-gradient(3px 1.4px at 30% 30%,rgba(255,220,150,.8),transparent 70%),
+      radial-gradient(4px 1.6px at 55% 60%,rgba(255,220,150,.65),transparent 70%),
+      radial-gradient(3px 1.4px at 72% 25%,rgba(255,220,150,.7),transparent 70%),
+      radial-gradient(3px 1.4px at 42% 80%,rgba(255,220,150,.5),transparent 70%)}
+  .window .birds{position:absolute;top:18%;left:16%;font-size:15px;color:rgba(31,24,64,.55);letter-spacing:8px;transform:rotate(-6deg)}
+  .window .label{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(20,16,46,.8);color:#FFE9C8;
+    font-size:13px;letter-spacing:.06em;padding:8px 18px;border-radius:999px;white-space:nowrap;backdrop-filter:blur(4px)}
+  .window .hero-play{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;
+    background:rgba(255,251,244,.95);display:flex;align-items:center;justify-content:center;font-size:23px;color:var(--deep);
+    box-shadow:0 12px 32px rgba(20,12,50,.45),0 0 0 10px rgba(255,251,244,.18)}
+  @keyframes rise{from{transform:translateY(28px)}to{transform:translateY(-18px)}}
+  @media (prefers-reduced-motion:reduce){.window .sun{animation:none}}
+
+  .ticker{background:#14102E;color:#FFE9C8;padding:12px 0;font-size:14.5px;letter-spacing:.03em;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(255,210,122,.18)}
+  .ticker .inner{display:inline-block;animation:scroll 42s linear infinite;padding-left:100%}
+  @keyframes scroll{to{transform:translateX(-100%)}}
+  @media (prefers-reduced-motion:reduce){.ticker .inner{animation:none;padding-left:0;white-space:normal}}
+  .ticker b{color:var(--gold);font-weight:600}
+
+  /* ================= SECTIONS ================= */
+  section{padding:96px 0}
+  section h2{font-size:clamp(30px,3.8vw,44px);margin-bottom:18px;max-width:18em}
+  section p.sub{color:var(--ink-soft);max-width:40em;margin-bottom:52px;font-size:17.5px}
+
+  /* ---- VALUES ---- */
+  .values{background:var(--paper)}
+  .values .big{font-family:var(--display);font-weight:650;font-size:clamp(26px,3.4vw,40px);line-height:1.22;max-width:21em;margin-bottom:20px}
+  .values .big em{font-style:normal;color:var(--rose)}
+  .values .big-sub{color:var(--ink-soft);font-size:18px;max-width:36em;margin-bottom:60px}
+  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .value{background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:34px 30px;position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+  .value:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(51,41,31,.12)}
+  .value .vsun{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:20px;
+    background:radial-gradient(circle at 35% 30%,#FFF0D0,var(--gold) 70%);box-shadow:0 6px 16px rgba(246,168,92,.45)}
+  .value h3{font-size:20px;margin-bottom:10px}
+  .value p{font-size:15.5px;color:var(--ink-soft)}
+  .value::after{content:"";position:absolute;right:-46px;top:-46px;width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle,rgba(246,168,92,.13),transparent 70%)}
+
+  /* ---- HOW ---- */
+  .how{background:linear-gradient(180deg,var(--paper),var(--sky))}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--line);border-radius:24px;overflow:hidden;background:#fff}
+  .step{padding:36px 32px;position:relative}
+  .step + .step{border-left:1.5px solid var(--line)}
+  .step .n{font-family:var(--display);font-weight:700;font-size:14px;color:var(--rose);letter-spacing:.12em;margin-bottom:16px;display:block}
+  .step h3{font-size:20px;margin-bottom:10px}
+  .step p{color:var(--ink-soft);font-size:15.5px}
+  .step:nth-child(2){background:linear-gradient(180deg,#fff,#FFF7EA)}
+
+  /* ---- GALLERY ---- */
+  .gallery-section{background:var(--sky);position:relative}
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .card{position:relative;border-radius:130px 130px 16px 16px;overflow:hidden;aspect-ratio:3/4.5;border:6px solid var(--ink);
+    display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer;background:var(--dusk);
+    transition:transform .22s ease,box-shadow .22s ease;text-align:left;padding:0;font:inherit;color:inherit;
+    box-shadow:0 10px 0 -4px rgba(51,41,31,.18),0 18px 40px rgba(51,41,31,.18)}
+  .card:nth-child(odd){transform:rotate(-.7deg)}
+  .card:nth-child(even){transform:rotate(.7deg)}
+  .card:hover,.card:focus-visible{transform:translateY(-8px) rotate(0);box-shadow:0 12px 0 -4px rgba(51,41,31,.16),0 28px 56px rgba(51,41,31,.3)}
+  .card .scene-bg{position:absolute;inset:0}
+  .card .meta{position:relative;background:rgba(20,16,46,.86);color:#FFF3E2;padding:15px 17px;font-size:13px;line-height:1.5;backdrop-filter:blur(3px)}
+  .card .meta b{display:block;font-family:var(--display);font-size:15px;color:#FFE9C8;margin-bottom:4px}
+  .card .play{position:absolute;top:37%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;
+    background:rgba(255,251,244,.93);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--deep);
+    box-shadow:0 8px 24px rgba(20,12,50,.4),0 0 0 8px rgba(255,251,244,.16);transition:transform .2s ease}
+  .card:hover .play{transform:translate(-50%,-50%) scale(1.1)}
+  .card .demo-tag{position:absolute;top:20px;left:50%;transform:translateX(-50%);background:rgba(20,16,46,.78);color:var(--gold);
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 13px;border-radius:999px}
+  .card .dur{position:absolute;top:37%;left:50%;transform:translate(-50%,38px);font-size:11.5px;color:rgba(255,251,244,.9);
+    background:rgba(20,16,46,.6);padding:3px 10px;border-radius:999px}
+  .bg-sicily{background:linear-gradient(180deg,#3A2B5E 0%,#7A4068 30%,#E96D5E 58%,#F6A85C 80%,#FFE9C8 100%)}
+  .bg-japan{background:linear-gradient(180deg,#1E2A4A 0%,#3E5C7A 35%,#7FA8C9 65%,#D9E8F0 90%,#FFF6E8 100%)}
+  .bg-kenya{background:linear-gradient(180deg,#4A2640 0%,#8A3A50 35%,#E0763E 65%,#F6C05C 88%,#FFF2D0 100%)}
+  .bg-mexico{background:linear-gradient(180deg,#3D1B52 0%,#7A2E6E 32%,#C94878 60%,#F08A5C 84%,#FFE9C8 100%)}
+  .coming{font-size:14px;color:var(--ink-soft);margin-top:34px;text-align:center}
+
+  /* ---- GIVE 1 GET 5 ---- */
+  .give5{background:linear-gradient(160deg,var(--deep),var(--night) 55%,#3A2B5E);color:var(--sky);position:relative;overflow:hidden}
+  .give5::before{content:"";position:absolute;right:-140px;top:-140px;width:440px;height:440px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,210,122,.22),transparent 65%)}
+  .give5 .eyebrow{color:var(--gold)}
+  .give5 .eyebrow::before{background:var(--gold)}
+  .give5 h2{color:#fff}
+  .give5 p.sub{color:rgba(255,243,226,.85)}
+  .g5-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+  .equation{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:8px 0 26px}
+  .eq-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,210,122,.4);border-radius:20px;padding:22px 24px;text-align:center;min-width:130px}
+  .eq-card .big-n{font-family:var(--display);font-weight:700;font-size:42px;color:var(--gold);line-height:1}
+  .eq-card .lbl{font-size:13px;color:rgba(255,243,226,.85);margin-top:6px}
+  .eq-sign{font-family:var(--display);font-size:34px;color:var(--gold);font-weight:700}
+  .g5-points{list-style:none;margin-top:6px}
+  .g5-points li{padding:11px 0 11px 34px;position:relative;font-size:15.5px;color:rgba(255,243,226,.9)}
+  .g5-points li::before{content:"☀";position:absolute;left:0;top:10px;color:var(--gold)}
+  .g5-fine{font-size:13px;color:rgba(255,243,226,.55);margin-top:22px;max-width:34em}
+
+  /* ---- SUBMIT ---- */
+  .submit-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .checklist{list-style:none}
+  .checklist li{padding:15px 0 15px 40px;border-bottom:1.5px solid var(--line);position:relative}
+  .checklist li::before{content:"☀";position:absolute;left:0;top:14px;color:var(--rose)}
+  .checklist li b{font-weight:600}
+  .note{background:#FFF3E2;border:1.5px solid var(--line);border-radius:18px;padding:22px 24px;font-size:15px;color:var(--ink-soft);margin-top:28px}
+  .note b{color:var(--ink)}
+
+  /* ---- WHY ---- */
+  .ritual{background:linear-gradient(180deg,var(--sky),var(--paper));position:relative}
+  .ritual .qmark{font-family:var(--display);font-size:120px;line-height:0;color:rgba(233,109,94,.18);display:block;height:48px}
+  .ritual blockquote{font-family:var(--display);font-weight:600;font-size:clamp(24px,3.4vw,36px);line-height:1.3;max-width:24em;margin:0 0 10px}
+  .ritual .trans{font-size:17px;color:var(--ink-soft);margin-bottom:28px;font-style:italic}
+  .ritual cite{display:block;font-style:normal;color:var(--ink-soft);font-size:16px;max-width:44em;line-height:1.75}
+  .ritual cite b{color:var(--ink)}
+
+  footer{background:var(--deep);color:rgba(255,243,226,.8);padding:60px 0;font-size:15px}
+  footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center}
+  footer a{color:#FFE9C8}
+  footer .fsun{font-size:22px;margin-right:8px}
+  :focus-visible{outline:3px solid var(--rose);outline-offset:3px;border-radius:4px}
+
+  /* ================= PLAYER MODAL ================= */
+  .modal{position:fixed;inset:0;background:rgba(14,10,36,.94);z-index:50;display:none;overflow-y:auto;padding:32px 16px}
+  .modal.open{display:block}
+  .modal-inner{max-width:880px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;justify-content:center}
+  .close{position:fixed;top:18px;right:22px;z-index:60;background:rgba(255,251,244,.12);border:1.5px solid rgba(255,251,244,.4);
+    color:#FFF3E2;width:46px;height:46px;border-radius:50%;font-size:18px;cursor:pointer}
+  .close:hover{background:rgba(255,251,244,.26)}
+  .phone{width:min(320px,86vw);aspect-ratio:9/16;border-radius:36px;border:9px solid #0E0A24;
+    box-shadow:0 0 0 2px rgba(255,210,122,.25),0 36px 80px rgba(0,0,0,.6);overflow:hidden;position:relative;background:#000;flex-shrink:0}
+  .pscene{position:absolute;inset:0;transition:filter .5s}
+  .pscene.paused{filter:saturate(.55) brightness(.75)}
+  .psun{position:absolute;left:50%;top:44%;width:84px;height:84px;margin-left:-42px;border-radius:50%;
+    background:radial-gradient(circle at 50% 35%,#FFF6D8,var(--gold) 60%,var(--apricot));box-shadow:0 0 56px 22px rgba(255,210,122,.6)}
+  .pground{position:absolute;left:0;right:0;bottom:0;height:36%}
+  .pground svg{width:100%;height:100%;display:block}
+  .pfigure{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);width:60%}
+  .pfigure svg{width:100%;display:block}
+  .wavearm{transform-origin:78% 60%;animation:wave 1.6s ease-in-out infinite}
+  @keyframes wave{0%,100%{transform:rotate(0)}50%{transform:rotate(-16deg)}}
+  .paused .wavearm{animation-play-state:paused}
+  @media (prefers-reduced-motion:reduce){.wavearm{animation:none}}
+  .pbadge{position:absolute;top:14px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:3}
+  .pwho{background:rgba(14,10,36,.74);backdrop-filter:blur(4px);border-radius:999px;padding:6px 13px;font-size:12px;color:#FFE9C8;letter-spacing:.03em}
+  .pclock{background:rgba(14,10,36,.74);border-radius:999px;padding:6px 10px;font-size:11.5px;color:var(--gold)}
+  .psubs{position:absolute;left:10px;right:10px;bottom:84px;z-index:3;text-align:center;min-height:104px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+  .porig{font-family:var(--display);font-weight:600;font-size:18px;color:#fff;text-shadow:0 2px 10px rgba(14,10,36,.85);line-height:1.28;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+  .peng{font-size:13.5px;color:#FFE9C8;background:rgba(14,10,36,.8);display:inline-block;align-self:center;padding:6px 13px;border-radius:10px;line-height:1.45;opacity:0;transform:translateY(8px);transition:opacity .35s .1s,transform .35s .1s;max-width:95%}
+  .psubs.show .porig,.psubs.show .peng{opacity:1;transform:translateY(0)}
+  .pcontrols{position:absolute;left:0;right:0;bottom:0;padding:12px 14px 16px;background:linear-gradient(transparent,rgba(14,10,36,.88));z-index:3;display:flex;align-items:center;gap:11px}
+  .pplay{width:42px;height:42px;border-radius:50%;border:none;background:var(--sky);color:var(--deep);font-size:15px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .pbar{flex:1;height:5px;background:rgba(255,255,255,.25);border-radius:99px;overflow:hidden}
+  .pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--apricot));border-radius:99px}
+  .ptime{font-size:11.5px;color:#FFE9C8;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+  .pend{position:absolute;inset:0;background:rgba(14,10,36,.9);z-index:5;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+  .pend.show{display:flex}
+  .pend h3{font-size:20px;color:#FFE9C8;margin-bottom:8px}
+  .pend p{font-size:13.5px;color:rgba(255,243,226,.8);margin-bottom:18px;max-width:24em}
+  .pend button{font-family:var(--display);font-weight:600;font-size:14px;padding:10px 24px;border-radius:999px;border:none;background:var(--gold);color:var(--deep);cursor:pointer}
+  .bio{color:#FFF3E2;max-width:420px;padding-top:8px}
+  .bio .demo-note{display:inline-block;background:rgba(255,210,122,.14);border:1px solid rgba(255,210,122,.5);color:var(--gold);
+    font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:999px;margin-bottom:18px}
+  .bio h3{font-size:26px;color:#fff;margin-bottom:4px}
+  .bio .place{color:var(--gold);font-size:15px;margin-bottom:18px}
+  .bio p{font-size:15.5px;line-height:1.72;color:rgba(255,243,226,.88);margin-bottom:14px}
+  .voice{font-size:13.5px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);padding:9px 16px;border-radius:999px;cursor:pointer;user-select:none;color:#FFF3E2;margin-top:6px}
+  .voice input{accent-color:var(--gold);width:15px;height:15px;cursor:pointer}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;padding:36px 0 80px;gap:48px}
+    .value-grid,.steps{grid-template-columns:1fr}
+    .step + .step{border-left:none;border-top:1.5px solid var(--line)}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .g5-grid,.submit-grid{grid-template-columns:1fr}
+    nav .links a:not(.navcta){display:none}
+    .btn-ghost{margin-left:0;margin-top:14px}
+    .modal-inner{grid-template-columns:1fr;justify-items:center}
+    .bio{max-width:min(320px,86vw)}
+  }
+  @media (max-width:480px){.gallery{grid-template-columns:1fr}.card:nth-child(odd),.card:nth-child(even){transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#">Buongiorno, <span>World</span></a>
+      <div class="links">
+        <a href="#values">Why</a>
+        <a href="#windows">Windows</a>
+        <a href="#how">How it works</a>
+        <a class="navcta" href="#give5">Send yours · get 5 mornings</a>
+      </div>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <div class="kicker"><span class="dot"></span> One real good morning a day · every language · every corner of Earth</div>
+        <h1>Not everyone gets a <em>good morning</em>.<br>You will.</h1>
+        <p class="lead">Millions of people wake up and no one says good morning to them. Here, <b>someone always does</b> — a real person, somewhere on Earth, in their own voice, with a piece of their own story. One window a day. That's how your morning begins now.</p>
+        <button class="btn btn-primary" data-open="nonna">▶ Watch a good morning</button>
+        <a class="btn btn-ghost" href="#give5">Send yours, get 5 ☀</a>
+        <div class="hero-proof"><span class="suns">☀☀☀☀</span> Four windows are open. Yours could be the fifth.</div>
+      </div>
+      <div class="window" data-open="nonna" role="button" tabindex="0" aria-label="Play the good morning from Ragusa, Sicily">
+        <div class="sun"></div>
+        <div class="birds" aria-hidden="true">⌄ ⌄</div>
+        <div class="sea"></div>
+        <div class="glints"></div>
+        <div class="hero-play" aria-hidden="true">▶</div>
+        <div class="label">Ragusa, Sicily · <span data-clock="Europe/Rome">7:02 AM</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-label="Places where it is morning right now">
+  <div class="inner" id="ticker-text">Right now it's morning in… loading the sunrise…</div>
+</div>
+
+<!-- ================= VALUES ================= -->
+<section id="values" class="values">
+  <div class="wrap">
+    <p class="eyebrow reveal">What we believe</p>
+    <p class="big reveal">A good morning seems like a small thing — until you notice <em>how many people never receive one.</em></p>
+    <p class="big-sub reveal">People who live alone. People far from home. People going through a hard season. This project exists for one simple reason: nobody should start their day unseen. And positivity, like a good morning, only works when it's passed on.</p>
+    <div class="value-grid">
+      <div class="value reveal">
+        <div class="vsun">🤝</div>
+        <h3>Connection over content</h3>
+        <p>This is not a feed and there is nothing to scroll. One person, once a day, looking into a camera and meaning it. The opposite of social media: a moment made for you, not for likes.</p>
+      </div>
+      <div class="value reveal">
+        <div class="vsun">☀️</div>
+        <h3>Positivity is passed on</h3>
+        <p>A good morning is the smallest unit of kindness that exists. It costs nothing, takes seconds, and changes the temperature of a whole day. We believe it travels: receive one, and you'll want to give one.</p>
+      </div>
+      <div class="value reveal">
+        <div class="vsun">🪟</div>
+        <h3>Every life is a window</h3>
+        <p>Behind every greeting there's a farm in Sicily, a fishing boat in Japan, a classroom in Nairobi. Forty seconds of a real voice can teach you more about a place than an hour of television.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section id="how" class="how">
+  <div class="wrap">
+    <p class="eyebrow reveal">How it works</p>
+    <h2 class="reveal">One person. One story. One window.</h2>
+    <p class="sub reveal">Simple by design — because mornings should be.</p>
+    <div class="steps reveal">
+      <div class="step">
+        <span class="n">STEP 01</span>
+        <h3>Someone shares their morning</h3>
+        <p>In their own language, from their kitchen, boat, or balcony. Not just "good morning" — something only they could say, shaped by their land and their life.</p>
+      </div>
+      <div class="step">
+        <span class="n">STEP 02</span>
+        <h3>We subtitle it in English</h3>
+        <p>Every video keeps its original voice. Subtitles make sure the warmth crosses every border it meets.</p>
+      </div>
+      <div class="step">
+        <span class="n">STEP 03</span>
+        <h3>You receive one each morning</h3>
+        <p>Delivered when you wake up. Before the news, before the inbox — a human being, wishing you well.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="windows" class="gallery-section">
+  <div class="wrap">
+    <p class="eyebrow reveal">The windows</p>
+    <h2 class="reveal">Every good morning opens a window.</h2>
+    <p class="sub reveal">Tap a window to watch. These are animated previews of the format — the first one tells the true story of the grandmother this whole project was born from. The real, phone-recorded videos are being collected right now.</p>
+    <div class="gallery">
+      <button class="card reveal" data-open="nonna">
+        <div class="scene-bg bg-sicily"></div>
+        <span class="demo-tag">Demo · Sicilian</span>
+        <div class="play" aria-hidden="true">▶</div>
+        <span class="dur">46 sec</span>
+        <div class="meta"><b>Nonna, 84 · Ragusa, Sicily 🇮🇹</b>Farmer, grandmother of six, once a New Yorker — and the reason this project exists.</div>
+      </button>
+      <button class="card reveal" data-open="kenji">
+        <div class="scene-bg bg-japan"></div>
+        <span class="demo-tag">Demo · Japanese</span>
+        <div class="play" aria-hidden="true">▶</div>
+        <span class="dur">42 sec</span>
+        <div class="meta"><b>Kenji, 71 · Shizuoka, Japan 🇯🇵</b>Fifty years on the same sea — and a new definition of a good day.</div>
+      </button>
+      <button class="card reveal" data-open="amara">
+        <div class="scene-bg bg-kenya"></div>
+        <span class="demo-tag">Demo · Swahili</span>
+        <div class="play" aria-hidden="true">▶</div>
+        <span class="dur">41 sec</span>
+        <div class="meta"><b>Amara, 35 · Nairobi, Kenya 🇰🇪</b>Her mother learned to read by candlelight. Now Amara teaches 32 children.</div>
+      </button>
+      <button class="card reveal" data-open="rosa">
+        <div class="scene-bg bg-mexico"></div>
+        <span class="demo-tag">Demo · Spanish</span>
+        <div class="play" aria-hidden="true">▶</div>
+        <span class="dur">41 sec</span>
+        <div class="meta"><b>Rosa, 58 · Oaxaca, Mexico 🇲🇽</b>In her mother's bakery, the first bread of the day is never sold — only given.</div>
+      </button>
+    </div>
+    <p class="coming">Your window could be next — and it earns you five mornings. ☀</p>
+  </div>
+</section>
+
+<!-- ================= GIVE 1 GET 5 ================= -->
+<section id="give5" class="give5">
+  <div class="wrap">
+    <div class="g5-grid">
+      <div>
+        <p class="eyebrow reveal">The morning exchange</p>
+        <h2 class="reveal">Give one morning.<br>Get five back.</h2>
+        <p class="sub reveal">Positivity shouldn't be consumed — it should circulate. So this is how it works here: send us your good morning video, and you unlock <b style="color:var(--gold)">5 days of the Daily Good Morning</b> — one video delivered to you every morning, free.</p>
+        <ul class="g5-points reveal">
+          <li>Your window joins the collection, with your name, your place, and your story.</li>
+          <li>For 5 mornings, you wake up to someone else's good morning from another corner of Earth.</li>
+          <li>Want more mornings? Send another window — or invite someone whose good morning the world should hear.</li>
+        </ul>
+        <p class="g5-fine reveal">The project is free and always will be. The exchange isn't a paywall — it's the engine: every morning received here was given by someone first.</p>
+      </div>
+      <div class="reveal">
+        <div class="equation">
+          <div class="eq-card"><div class="big-n">1</div><div class="lbl">good morning<br>you give</div></div>
+          <div class="eq-sign">=</div>
+          <div class="eq-card"><div class="big-n">5</div><div class="lbl">mornings<br>you receive</div></div>
+        </div>
+        <a class="btn btn-primary" href="#submit">Send your good morning ☀</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUBMIT ================= -->
+<section id="submit">
+  <div class="wrap">
+    <div class="submit-grid">
+      <div>
+        <p class="eyebrow reveal">Join in</p>
+        <h2 class="reveal">Send your good morning.</h2>
+        <p class="sub reveal" style="margin-bottom:26px">Record a short video on your phone — vertical is perfect — and send it with a few lines about yourself. You'll be someone's first smile of the day, and your 5 mornings start as soon as it's published.</p>
+        <a class="btn btn-primary reveal" style="background:linear-gradient(135deg,var(--rose),#D85548);color:#fff;box-shadow:0 10px 30px rgba(233,109,94,.4)" href="mailto:hello@buongiornoworld.example?subject=My%20good%20morning%20video">Send by email</a>
+        <div class="note reveal"><b>Note:</b> replace this email with your real address (or a Google Form link) before publishing. A Google Form with a file-upload field is free and works perfectly for collecting videos.</div>
+      </div>
+      <div>
+        <ul class="checklist reveal">
+          <li><b>20–45 seconds</b> — or as long as your story needs (under a minute is ideal). Filmed on your phone, vertical is perfect.</li>
+          <li><b>Speak your own language.</b> We'll subtitle it in English so the whole world understands you.</li>
+          <li><b>Share something real.</b> Not just "good morning" — a memory, a lesson life taught you, something your mother used to say, what your work or your land has shown you. The personal is what makes it powerful.</li>
+          <li><b>Tell us who you are:</b> your first name, your age, where you are, and a few lines of background — so we can introduce your window properly.</li>
+          <li><b>Consent:</b> by sending a video you agree we can publish it on this project. Nothing else, ever.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY THIS EXISTS ================= -->
+<section class="ritual">
+  <div class="wrap">
+    <p class="eyebrow reveal">Why this exists</p>
+    <span class="qmark reveal" aria-hidden="true">"</span>
+    <blockquote class="reveal">Cucina sempri quarchi cosa pi cu' ti sta vicinu.</blockquote>
+    <p class="trans reveal">Always cook something for the people around you.</p>
+    <cite class="reveal">This whole project began with one voice: <b>my grandmother's, in Ragusa, Sicily.</b> Every morning she says good morning the same way — and in those few seconds there is her farm, her years as an emigrant in New York, her six grandchildren, her kitchen that is never closed to anyone. A whole way of caring for people, compressed into a greeting.<br><br>We believe every person on Earth carries a morning like that: shaped by a place, a history, a life. This site exists to collect them — one window at a time — so that every day, someone somewhere wakes up a little less alone.</cite>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="fsun">☀</span><strong style="font-family:var(--display);color:#FFE9C8">Buongiorno, World</strong><br>
+      Not everyone gets a good morning. You will.
+    </div>
+    <div>
+      <a href="#give5">Send yours · get 5 mornings</a><br>
+      <a href="#values">What we believe</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= PLAYER MODAL ================= -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Good morning video player">
+  <button class="close" id="closeBtn" aria-label="Close player">✕</button>
+  <div class="modal-inner">
+    <div class="phone">
+      <div class="pscene" id="pscene">
+        <div class="psun"></div>
+        <div class="pground" id="pground"></div>
+        <div class="pfigure" id="pfigure"></div>
+      </div>
+      <div class="pbadge">
+        <span class="pwho" id="pwho"></span>
+        <span class="pclock" id="pclock"></span>
+      </div>
+      <div class="psubs" id="psubs">
+        <div class="porig" id="porig"></div>
+        <div class="peng" id="peng"></div>
+      </div>
+      <div class="pcontrols">
+        <button class="pplay" id="pplay" aria-label="Play or pause">▶</button>
+        <div class="pbar"><div class="pfill" id="pfill"></div></div>
+        <div class="ptime" id="ptime">0:00</div>
+      </div>
+      <div class="pend" id="pend">
+        <h3 id="pendTitle">☀</h3>
+        <p>Tomorrow, your good morning could come from somewhere else entirely. One window a day.</p>
+        <button id="preplay">↻ Watch again</button>
+      </div>
+    </div>
+    <div class="bio">
+      <span class="demo-note">Animated preview — real videos coming</span>
+      <h3 id="bioName"></h3>
+      <div class="place" id="bioPlace"></div>
+      <div id="bioText"></div>
+      <label class="voice"><input type="checkbox" id="voiceToggle"> 🔊 Read the lines aloud (synthetic voice)</label>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const SIL = {
+  nonna:`<svg viewBox="0 0 200 150"><g fill="#241038"><circle cx="100" cy="52" r="16"/><path d="M100,36 q-14,-6 -18,6 q-3,10 4,12 q-2,-12 14,-18 Z"/><circle cx="84" cy="40" r="6"/><path d="M78,70 q22,-12 44,0 l8,52 -60,0 Z"/><path class="wavearm" d="M120,74 q18,-8 26,-26 q3,-6 8,-3 q4,3 1,9 q-10,22 -30,30 Z"/><path d="M80,74 q-12,8 -14,24 l8,2 q3,-14 12,-20 Z"/></g><path d="M86,92 q14,-6 28,0 l4,30 -36,0 Z" fill="#3D1B52"/><circle cx="94" cy="50" r="4" fill="none" stroke="#FFD27A" stroke-width="1.4"/><circle cx="105" cy="50" r="4" fill="none" stroke="#FFD27A" stroke-width="1.4"/></svg>`,
+  kenji:`<svg viewBox="0 0 200 150"><path d="M40,118 q60,18 120,0 l-10,20 -100,0 Z" fill="#16213E"/><g fill="#1B2A4A"><circle cx="100" cy="50" r="15"/><path d="M82,44 q18,-14 36,0 l-4,-12 q-14,-8 -28,0 Z"/><path d="M82,66 q18,-10 36,0 l6,46 -48,0 Z"/><path class="wavearm" d="M118,70 q16,-6 24,-24 q3,-6 8,-3 q4,3 1,9 q-9,20 -28,28 Z"/><path d="M84,70 q-14,6 -16,26 l8,2 q3,-16 14,-22 Z"/></g><rect x="86" y="78" width="28" height="8" rx="3" fill="#E0B25C"/></svg>`,
+  amara:`<svg viewBox="0 0 200 150"><g fill="#2E0F2A"><circle cx="100" cy="48" r="15"/><path d="M85,38 a16,14 0 0,1 30,0 q6,4 2,10 q2,-14 -17,-16 q-19,2 -17,16 q-4,-6 2,-10 Z"/><path d="M80,66 q20,-10 40,0 l7,48 -54,0 Z"/><path class="wavearm" d="M118,70 q16,-6 24,-24 q3,-6 8,-3 q4,3 1,9 q-9,20 -28,28 Z"/><path d="M84,72 q-8,4 -10,20 l16,2 Z"/></g><circle cx="78" cy="98" r="9" fill="#E0763E"/><circle cx="78" cy="98" r="6" fill="#FFF2D0"/></svg>`,
+  rosa:`<svg viewBox="0 0 200 150"><g fill="#2A0F33"><circle cx="100" cy="50" r="15"/><path d="M84,42 q16,-16 32,0 q4,8 -2,12 q2,-14 -14,-16 q-16,2 -14,16 q-6,-4 -2,-12 Z"/><path d="M79,68 q21,-11 42,0 l7,46 -56,0 Z"/><path class="wavearm" d="M118,72 q16,-6 24,-24 q3,-6 8,-3 q4,3 1,9 q-9,20 -28,28 Z"/><path d="M83,72 q-10,6 -12,22 l8,2 q3,-14 12,-18 Z"/></g><path d="M88,90 q12,-5 24,0 l3,24 -30,0 Z" fill="#C94878"/><ellipse cx="76" cy="106" rx="11" ry="7" fill="#E0B25C"/><ellipse cx="76" cy="104" rx="8" ry="4" fill="#F6C05C"/></svg>`
+};
+const GROUND = {
+  nonna:`<svg viewBox="0 0 340 200" preserveAspectRatio="none"><path d="M0,80 Q60,40 130,75 T340,60 L340,200 L0,200 Z" fill="#7A2E55"/><path d="M0,120 Q90,85 180,115 T340,105 L340,200 L0,200 Z" fill="#5C2244"/><g fill="#3A1530"><rect x="40" y="95" width="18" height="26"/><rect x="62" y="88" width="14" height="33"/><rect x="200" y="92" width="16" height="28"/><rect x="222" y="84" width="20" height="36"/><circle cx="234" cy="64" r="5"/></g><g fill="#FFD27A"><rect x="45" y="100" width="4" height="5"/><rect x="66" y="94" width="4" height="5"/><rect x="204" y="98" width="4" height="5"/><rect x="227" y="92" width="4" height="5"/></g></svg>`,
+  kenji:`<svg viewBox="0 0 340 200" preserveAspectRatio="none"><path d="M0,70 L340,70 L340,200 L0,200 Z" fill="#2E4A6E"/><path d="M0,70 Q85,62 170,70 T340,70 L340,90 Q255,82 170,90 T0,90 Z" fill="#3E5C7A" opacity=".7"/><path d="M0,110 Q85,102 170,110 T340,110 L340,130 Q255,122 170,130 T0,130 Z" fill="#24405E" opacity=".8"/><path d="M250,40 L290,40 L284,58 L256,58 Z" fill="#16213E"/><rect x="268" y="22" width="3" height="18" fill="#16213E"/><path d="M271,22 l14,8 -14,6 Z" fill="#E0763E"/></svg>`,
+  amara:`<svg viewBox="0 0 340 200" preserveAspectRatio="none"><path d="M0,95 L340,95 L340,200 L0,200 Z" fill="#5C2244"/><g fill="#3A1530"><rect x="20" y="55" width="26" height="40"/><rect x="52" y="40" width="22" height="55"/><rect x="80" y="62" width="30" height="33"/><rect x="240" y="48" width="24" height="47"/><rect x="270" y="60" width="34" height="35"/><rect x="308" y="44" width="20" height="51"/></g><g fill="#FFD27A"><rect x="26" y="62" width="5" height="6"/><rect x="36" y="74" width="5" height="6"/><rect x="58" y="48" width="5" height="6"/><rect x="64" y="64" width="5" height="6"/><rect x="246" y="56" width="5" height="6"/><rect x="278" y="68" width="5" height="6"/><rect x="314" y="52" width="5" height="6"/></g><path d="M150,95 q20,-30 40,0 Z" fill="#3A1530"/><rect x="168" y="70" width="4" height="25" fill="#3A1530"/></svg>`,
+  rosa:`<svg viewBox="0 0 340 200" preserveAspectRatio="none"><path d="M0,100 Q80,70 170,95 T340,85 L340,200 L0,200 Z" fill="#5C2244"/><g fill="#3A1530"><rect x="30" y="78" width="34" height="30"/><path d="M30,78 L47,64 L64,78 Z"/><rect x="230" y="72" width="40" height="36"/><path d="M230,72 L250,56 L270,72 Z"/><rect x="284" y="84" width="28" height="24"/></g><g fill="#FFB05C"><rect x="40" y="86" width="6" height="8"/><rect x="240" y="82" width="7" height="9"/><rect x="256" y="82" width="7" height="9"/><rect x="292" y="90" width="6" height="7"/></g><path d="M250,56 l0,-14 5,0 0,14 Z" fill="#3A1530"/><circle cx="252" cy="36" r="4" fill="#FFE9C8" opacity=".7"/><circle cx="256" cy="28" r="5" fill="#FFE9C8" opacity=".5"/></svg>`
+};
+const PEOPLE = {
+  nonna:{
+    name:"Nonna", age:84, place:"Ragusa, Sicily 🇮🇹", flagline:"Nonna, 84 · Ragusa 🇮🇹",
+    tz:"Europe/Rome", lang:"it-IT", duration:46, scene:"bg-sicily",
+    end:"Buongiorno from Ragusa ☀",
+    bio:[
+      "Born and raised among the farms of the Ragusa countryside, Nonna has worked the land her whole life — olives, tomatoes, and whatever the season brings.",
+      "Like so many Sicilians of her generation, she spent part of her life in New York, carrying her kitchen with her across the ocean — and then carrying it back home.",
+      "She has six grandchildren, and the thing she loves most in the world is cooking: for family, for neighbors, for anyone who walks through the door. Every single day she wakes up smiling, and that smile is what holds her whole family steady. She is the reason this project exists."
+    ],
+    lines:[
+      {t:0.5,d:4.5,o:"Bongiornu, gioiuzza mia.",e:"Good morning, my little joy."},
+      {t:5.5,d:5.5,o:"Quannu avia vint'anni, partivi pi Nova York cu 'na valiggia sula.",e:"When I was twenty, I left for New York with a single suitcase."},
+      {t:11.5,d:5.5,o:"Dda, u sapuri ru pani ri me matri mi mancava cchiù ri tuttu.",e:"Over there, what I missed most was the taste of my mother's bread."},
+      {t:17.5,d:6.0,o:"Accussì capivi: a cucina nun è manciari. È ricurdarisi cu' semu.",e:"That's when I understood: cooking isn't food. It's remembering who we are."},
+      {t:24.0,d:5.5,o:"Ora aju sei niputi, e ogni duminica a tavula mia è china.",e:"Now I have six grandchildren, and every Sunday my table is full."},
+      {t:30.0,d:7.0,o:"Cucina sempri quarchi cosa pi cu' ti sta vicinu. Puru si è sulu pani e ogghiu.",e:"Always cook something for the people around you. Even if it's just bread and oil."},
+      {t:37.5,d:7.5,o:"Pirchì nuddu è straniero quannu mancia â tavula tua. Un vasuneddu.",e:"Because no one is a stranger once they've eaten at your table. A little kiss."}
+    ]
+  },
+  kenji:{
+    name:"Kenji", age:71, place:"Shizuoka, Japan 🇯🇵", flagline:"Kenji, 71 · Shizuoka 🇯🇵",
+    tz:"Asia/Tokyo", lang:"ja-JP", duration:42, scene:"bg-japan",
+    end:"Ohayō from Shizuoka ☀",
+    bio:[
+      "Kenji has been a fisherman for fifty years, setting out from the same small harbor in Shizuoka before dawn, with Mount Fuji at his back.",
+      "He says the sea has taught him everything he knows about patience — and that no two sunrises over the bay have ever been the same.",
+      "Now semi-retired, he still goes out three mornings a week — mostly, he admits, for the silence and the light. His granddaughter taught him to film with a phone just for this project."
+    ],
+    lines:[
+      {t:0.5,d:4.0,o:"おはようございます。",e:"Good morning."},
+      {t:5.0,d:5.5,o:"五十年、同じ海に出ています。",e:"For fifty years, I have gone out on this same sea."},
+      {t:11.0,d:6.0,o:"若い頃は、大漁の日だけがいい日だと思っていました。",e:"When I was young, I thought a good day meant a big catch."},
+      {t:17.5,d:6.0,o:"妻を亡くしてから、考えが変わりました。",e:"After I lost my wife, I began to think differently."},
+      {t:24.0,d:6.5,o:"いい日とは、朝日を見られる日のことです。",e:"A good day is any day you get to see the sunrise."},
+      {t:31.0,d:5.0,o:"それだけで、じゅうぶんです。",e:"That alone is enough."},
+      {t:36.5,d:5.0,o:"今日も、あなたの海が静かでありますように。",e:"May your sea be calm today, too."}
+    ]
+  },
+  amara:{
+    name:"Amara", age:35, place:"Nairobi, Kenya 🇰🇪", flagline:"Amara, 35 · Nairobi 🇰🇪",
+    tz:"Africa/Nairobi", lang:"sw-KE", duration:41, scene:"bg-kenya",
+    end:"Habari from Nairobi ☀",
+    bio:[
+      "Amara teaches primary school in Nairobi, where her classroom of thirty-two kids starts every single day the same way: with a song and a smile.",
+      "Her mother never went to school, but taught herself to read — and then taught Amara, by candlelight, in a one-room house in Kibera.",
+      "She believes the most important thing she teaches isn't reading or maths: it's that how you greet the morning decides what kind of day you'll have."
+    ],
+    lines:[
+      {t:0.5,d:4.0,o:"Habari ya asubuhi, rafiki yangu.",e:"Good morning, my friend."},
+      {t:5.0,d:6.5,o:"Mama yangu hakwenda shule kamwe.",e:"My mother never went to school."},
+      {t:12.0,d:6.5,o:"Lakini alijifunza kusoma, na akanifundisha mimi — kwa mwanga wa kandili.",e:"But she taught herself to read, and then she taught me — by candlelight."},
+      {t:19.0,d:5.5,o:"Sasa mimi ni mwalimu wa watoto thelathini na wawili.",e:"Today, I am the teacher of thirty-two children."},
+      {t:25.0,d:5.5,o:"Kila asubuhi tunaanza na wimbo.",e:"Every morning, we begin with a song."},
+      {t:31.0,d:5.0,o:"Kile mama alichonipa, mimi nawapa wao.",e:"What my mother gave me, I give to them."},
+      {t:36.5,d:4.0,o:"Siku njema, rafiki.",e:"Have a beautiful day, my friend."}
+    ]
+  },
+  rosa:{
+    name:"Rosa", age:58, place:"Oaxaca, Mexico 🇲🇽", flagline:"Rosa, 58 · Oaxaca 🇲🇽",
+    tz:"America/Mexico_City", lang:"es-MX", duration:41, scene:"bg-mexico",
+    end:"Buenos días from Oaxaca ☀",
+    bio:[
+      "Rosa runs the bakery her mother opened forty years ago in a small street in Oaxaca. Her ovens are lit at 4 AM, long before the rest of the town wakes up.",
+      "Her mother passed away six years ago, but her recipes — and her rule that the first bread of the day is never sold, only given — still run the bakery.",
+      "She knows every customer by name and by their usual order — and she says a morning without sharing bread with someone is a morning wasted."
+    ],
+    lines:[
+      {t:0.5,d:4.0,o:"Buenos días, mi cielo.",e:"Good morning, my dear."},
+      {t:5.0,d:5.5,o:"Esta panadería la abrió mi madre hace cuarenta años.",e:"My mother opened this bakery forty years ago."},
+      {t:11.0,d:7.0,o:"Ella ya no está. Pero cada mañana, cuando amaso, mis manos recuerdan las suyas.",e:"She's gone now. But every morning, when I knead, my hands remember hers."},
+      {t:18.5,d:6.0,o:"Ella tenía una regla: el primer pan del día nunca se vende.",e:"She had one rule: the first bread of the day is never sold."},
+      {t:25.0,d:5.0,o:"Se regala. Siempre.",e:"It is given away. Always."},
+      {t:30.5,d:5.0,o:"Hoy, ese pan es para ti.",e:"Today, that bread is for you."},
+      {t:36.0,d:4.5,o:"Que te vaya bonito, mi cielo.",e:"May your day go beautifully, my dear."}
+    ]
+  }
+};
+
+/* ============ TICKER & CLOCKS ============ */
+(function(){
+  const cities=[["Ragusa, Sicily","Europe/Rome"],["Lisbon, Portugal","Europe/Lisbon"],["Nairobi, Kenya","Africa/Nairobi"],
+    ["Mumbai, India","Asia/Kolkata"],["Tokyo, Japan","Asia/Tokyo"],["Seoul, South Korea","Asia/Seoul"],
+    ["Sydney, Australia","Australia/Sydney"],["Auckland, New Zealand","Pacific/Auckland"],["Mexico City, Mexico","America/Mexico_City"],
+    ["Buenos Aires, Argentina","America/Argentina/Buenos_Aires"],["New York, USA","America/New_York"],["Honolulu, Hawaii","Pacific/Honolulu"],
+    ["Reykjavík, Iceland","Atlantic/Reykjavik"],["Cairo, Egypt","Africa/Cairo"],["Hanoi, Vietnam","Asia/Bangkok"],["Lagos, Nigeria","Africa/Lagos"]];
+  const now=new Date();
+  const morning=cities.filter(([,tz])=>{try{const h=parseInt(new Intl.DateTimeFormat("en-GB",{hour:"numeric",hour12:false,timeZone:tz}).format(now),10);return h>=5&&h<11}catch(e){return false}});
+  const el=document.getElementById("ticker-text");
+  el.innerHTML=morning.length
+    ?"☀ Right now it's morning in "+morning.map(([c])=>"<b>"+c+"</b>").join(" · ")+" — someone there could be recording your next good morning. "
+    :"☀ Somewhere on Earth, the sun is always rising. ";
+  document.querySelectorAll("[data-clock]").forEach(el=>{
+    try{el.textContent=new Intl.DateTimeFormat("en-US",{hour:"numeric",minute:"2-digit",timeZone:el.dataset.clock}).format(now)}catch(e){}
+  });
+})();
+
+/* ============ SCROLL REVEAL ============ */
+(function(){
+  if(!("IntersectionObserver"in window)){document.querySelectorAll(".reveal").forEach(e=>e.classList.add("in"));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(e=>io.observe(e));
+})();
+
+/* ============ PLAYER ============ */
+const modal=document.getElementById("modal"),closeBtn=document.getElementById("closeBtn"),
+  pscene=document.getElementById("pscene"),pground=document.getElementById("pground"),pfigure=document.getElementById("pfigure"),
+  pwho=document.getElementById("pwho"),pclock=document.getElementById("pclock"),
+  psubs=document.getElementById("psubs"),porig=document.getElementById("porig"),peng=document.getElementById("peng"),
+  pplay=document.getElementById("pplay"),pfill=document.getElementById("pfill"),ptime=document.getElementById("ptime"),
+  pend=document.getElementById("pend"),pendTitle=document.getElementById("pendTitle"),preplay=document.getElementById("preplay"),
+  voiceToggle=document.getElementById("voiceToggle"),
+  bioName=document.getElementById("bioName"),bioPlace=document.getElementById("bioPlace"),bioText=document.getElementById("bioText");
+
+let P=null,playing=false,elapsed=0,last=null,raf=null,line=-1,spoken=-1;
+const fmt=s=>Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
+
+function speak(text,lang){
+  if(!voiceToggle.checked||!("speechSynthesis"in window))return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang;u.rate=0.92;
+  const v=speechSynthesis.getVoices().find(v=>v.lang.replace("_","-").startsWith(lang.split("-")[0]));
+  if(v)u.voice=v;
+  speechSynthesis.speak(u);
+}
+function tick(now){
+  if(!playing)return;
+  if(last===null)last=now;
+  elapsed+=(now-last)/1000;last=now;
+  if(elapsed>=P.duration){finish();return}
+  pfill.style.width=(elapsed/P.duration*100)+"%";
+  ptime.textContent=fmt(elapsed)+" / "+fmt(P.duration);
+  const idx=P.lines.findIndex(l=>elapsed>=l.t&&elapsed<l.t+l.d);
+  if(idx!==line){
+    line=idx;
+    if(idx>=0){
+      porig.textContent=P.lines[idx].o;peng.textContent=P.lines[idx].e;
+      psubs.classList.add("show");
+      if(idx!==spoken){spoken=idx;speak(P.lines[idx].o,P.lang)}
+    }else psubs.classList.remove("show");
+  }
+  raf=requestAnimationFrame(tick);
+}
+function play(){playing=true;last=null;pplay.textContent="❚❚";pscene.classList.remove("paused");pend.classList.remove("show");raf=requestAnimationFrame(tick)}
+function pause(){playing=false;pplay.textContent="▶";pscene.classList.add("paused");if("speechSynthesis"in window)speechSynthesis.cancel();cancelAnimationFrame(raf)}
+function finish(){pause();elapsed=0;line=-1;spoken=-1;pfill.style.width="100%";psubs.classList.remove("show");pend.classList.add("show")}
+function resetUI(){pfill.style.width="0%";ptime.textContent="0:00 / "+fmt(P.duration);psubs.classList.remove("show");pend.classList.remove("show");line=-1;spoken=-1;elapsed=0}
+
+function openPlayer(key){
+  P=PEOPLE[key];
+  pscene.className="pscene "+P.scene;
+  pground.innerHTML=GROUND[key];
+  pfigure.innerHTML=SIL[key];
+  pwho.textContent=P.flagline;
+  try{pclock.textContent=new Intl.DateTimeFormat("en-US",{hour:"numeric",minute:"2-digit",timeZone:P.tz}).format(new Date())}catch(e){pclock.textContent=""}
+  pendTitle.textContent=P.end;
+  bioName.textContent=P.name+", "+P.age;
+  bioPlace.textContent="Window onto "+P.place+" · spoken in "+({"it-IT":"Sicilian","ja-JP":"Japanese","sw-KE":"Swahili","es-MX":"Spanish"})[P.lang]+", subtitled in English";
+  bioText.innerHTML=P.bio.map(p=>"<p>"+p+"</p>").join("");
+  resetUI();
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+  setTimeout(play,450);
+}
+function closePlayer(){pause();modal.classList.remove("open");document.body.style.overflow=""}
+
+document.querySelectorAll("[data-open]").forEach(el=>{
+  el.addEventListener("click",()=>openPlayer(el.dataset.open));
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openPlayer(el.dataset.open)}});
+});
+pplay.addEventListener("click",()=>playing?pause():play());
+preplay.addEventListener("click",()=>{resetUI();play()});
+closeBtn.addEventListener("click",closePlayer);
+modal.addEventListener("click",e=>{if(e.target===modal)closePlayer()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closePlayer()});
+if("speechSynthesis"in window)speechSynthesis.getVoices();
+</script>
+
+</body>
+</html>
