@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gabryrko9.github.io/buongiornoworld/sitemap.xml
